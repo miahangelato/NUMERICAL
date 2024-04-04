@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result</h1>
+    <p>{{ result }}</p>
+
+<h2>Coefficients Matrix</h2>
+    <table border="1">
+        {% for row in coefficients_matrix %}
+            <tr>
+                {% for coef in row %}
+                    <td>{{ coef }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h1>matrix1</h1>
+    <table border="1">
+        {% for row in x_matrix %}
+            <tr>
+                {% for coef in row %}
+                    <td>{{ coef }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <h1>matrix2</h1>
+    <table border="1">
+        {% for row in y_matrix %}
+            <tr>
+                {% for coef in row %}
+                    <td>{{ coef }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h1>matrix3</h1>
+    <table border="1">
+        {% for row in z_matrix %}
+            <tr>
+                {% for coef in row %}
+                    <td>{{ coef }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Constants Vector</h2>
+    <table border="1">
+        <tr>
+            {% for constant in constants_vector %}
+                <td>{{ constant }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>
