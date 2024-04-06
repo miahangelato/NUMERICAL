@@ -1,44 +1,202 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!-- gauss_jacobi/templates/gauss_jacobi/result.html -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jacobi's Result</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to top, #ffd700, #ffa500);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-<table>
-    <thead>
-        <tr>
+      .result-container {
+        width: 90%;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        position: relative;
+        height: 80vh;
+      }
+
+      h2 {
+        margin-top: 20px;
+        padding: 10px 0;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .tables-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        margin: 0 auto;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      table tr {
+        vertical-align: middle;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 25px;
+      }
+
+      .logo img {
+        max-width: 300px;
+        height: auto;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .button-container button {
+        background-color: #ffe000;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+        border: 2px solid #000;
+        border-radius: 15px;
+        margin: 0 10px;
+        font-size: large;
+      }
+
+      .button-container button:hover {
+        background-color: black;
+        color: #fff;
+        box-shadow: 0 8px 12px rgba(255, 230, 0, 0.1);
+        transform: scale(1.05);
+      }
+
+      .tables-container > div {
+        width: calc(33.33% - 20px);
+      }
+
+      .approximation-error {
+        margin-top: 20px;
+      }
+
+      .error-heading {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .error-list {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+      }
+
+      .error-item {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      .result-container::before,
+      .result-container::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-image: url('{% static "nail_icon.png" %}');
+        background-size: cover;
+      }
+
+      .result-container::before {
+        top: 15px;
+        left: 15px;
+      }
+
+      .result-container::after {
+        bottom: 15px;
+        right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="result-container">
+      <div class="logo">
+        <a href="/"><img src="{% static 'Results.png' %}" alt="Logo" /></a>
+      </div>
+      <table>
+        <thead>
+          <tr>
             <th>Iteration</th>
-            <th>Coefficient/Variable 1</th>
-            <th>Coefficient/Variable 2</th>
-            <!-- Add more columns as needed based on the number of equations -->
-        </tr>
-    </thead>
-    <tbody>
-        {% for iteration, values in results.items %}
-        <tr>
+            <th>Coefficient (Variable 1)</th>
+            <th>Coefficient (Variable 2)</th>
+            <th>Coefficient (Variable 3)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for iteration, values in results.items %}
+          <tr>
             <td>{{ iteration }}</td>
             {% for value in values %}
             <td>{{ value }}</td>
             {% endfor %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-<h1>approximation_error</h1>
-<!-- result.html -->
-{% for variable, approximation_error in variable_error_pairs %}
-    <p>{{ variable }} = {{ approximation_error }}</p>
-{% endfor %}
+      <div class="approximation-error">
+        <h2 class="error-heading">Approximation Error</h2>
+        <ul class="error-list">
+          {% for variable, approximation_error in variable_error_pairs %}
+          <li class="error-item">{{ variable }} = {{ approximation_error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
 
+      <div class="button-container">
+        <button class="button" onclick="goBack()">Go Back</button>
+        <button class="button" onclick="goToCramers()">Go to Cramer's</button>
+      </div>
+    </div>
 
+    <script>
+      function goBack() {
+        window.history.back();
+      }
 
-
-
-
-
-</body>
+      function goToCramers() {
+        window.location.href = "/cramers";
+      }
+    </script>
+  </body>
 </html>

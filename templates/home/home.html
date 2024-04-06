@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JaCramerizer</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(to top, #ffd700, #ffa500);
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 80px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      h2:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <img
+        src="{% static 'Randomshit.png' %}"
+        alt="Random"
+        style="max-width: 900px; margin-right: 50px"
+      />
+    </div>
+    <div class="button-container">
+      <a href="/">
+        <img
+          src="{% static 'Logo.png' %}"
+          alt="Logo"
+          style="margin-bottom: 25px;"
+        />
+      </a>
+      <a href="/cramers">
+        <h2
+          style="
+            padding: 20px 40px;
+            color: black;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+            background-color: #ffe000;
+            border: 2px solid black;
+          "
+        >
+          Cramer's Rule Solver
+        </h2>
+      </a>
+      <a href="/jacobi">
+        <h2
+          style="
+            padding: 20px 40px;
+            color: black;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+            background-color: #ffe000;
+            border: 2px solid black;
+          "
+        >
+          Jacobi Method Solver
+        </h2>
+      </a>
+    </div>
+  </body>
+</html>

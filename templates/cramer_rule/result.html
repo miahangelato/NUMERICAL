@@ -1,63 +1,222 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Result</title>
-</head>
-<body>
-    <h1>Result</h1>
-    <p>{{ result }}</p>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cramer's Result</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to top, #ffd700, #ffa500);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-<h2>Coefficients Matrix</h2>
-    <table border="1">
-        {% for row in coefficients_matrix %}
-            <tr>
-                {% for coef in row %}
-                    <td>{{ coef }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+      .result-container {
+        width: 90%;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        position: relative;
+      }
 
-    <h1>matrix1</h1>
-    <table border="1">
-        {% for row in x_matrix %}
-            <tr>
-                {% for coef in row %}
-                    <td>{{ coef }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
-    <h1>matrix2</h1>
-    <table border="1">
-        {% for row in y_matrix %}
-            <tr>
-                {% for coef in row %}
-                    <td>{{ coef }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+      h2 {
+        margin-top: 20px;
+        padding: 10px 0;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        text-align: center;
+      }
 
-    <h1>matrix3</h1>
-    <table border="1">
-        {% for row in z_matrix %}
-            <tr>
-                {% for coef in row %}
-                    <td>{{ coef }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+      .tables-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
 
-    <h2>Constants Vector</h2>
-    <table border="1">
-        <tr>
-            {% for constant in constants_vector %}
-                <td>{{ constant }}</td>
+      table {
+        width: calc(33.33% - 20px);
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        margin: 0 auto;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      table tr {
+        vertical-align: middle;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .logo img {
+        max-width: 350px;
+        height: auto;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .button-container button {
+        background-color: #ffe000;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+        border: 2px solid #000;
+        border-radius: 15px;
+        margin: 0 10px;
+        font-size: large;
+      }
+
+      .button-container button:hover {
+        background-color: black;
+        color: #fff;
+        box-shadow: 0 8px 12px rgba(255, 230, 0, 0.1);
+        transform: scale(1.05);
+      }
+
+      .tables-container > div {
+        width: calc(33.33% - 20px);
+      }
+
+      @media (max-width: 768px) {
+        .tables-container > div {
+          width: 100%;
+        }
+      }
+
+      .result-container::before,
+      .result-container::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-image: url('{% static "nail_icon.png" %}');
+        background-size: cover;
+      }
+
+      .result-container::before {
+        top: 15px;
+        left: 15px;
+      }
+
+      .result-container::after {
+        bottom: 15px;
+        right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="result-container">
+      <div class="logo">
+        <a href="/"><img src="{% static 'Results.png' %}" alt="Logo" /></a>
+      </div>
+      <p style="text-align: center; margin: 0">{{ result }}</p>
+      <div class="tables-container">
+        <div>
+          <h2>COEFFICIENT'S MATRIX</h2>
+          <table>
+            {% for row in coefficients_matrix %}
+            <tr>
+              {% for coef in row %}
+              <td>{{ coef }}</td>
+              {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-    </table>
-</body>
+          </table>
+        </div>
+
+        <div>
+          <h2>MATRIX 1</h2>
+          <table>
+            {% for row in x_matrix %}
+            <tr>
+              {% for coef in row %}
+              <td>{{ coef }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+        <div>
+          <h2>MATRIX 2</h2>
+          <table>
+            {% for row in y_matrix %}
+            <tr>
+              {% for coef in row %}
+              <td>{{ coef }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+
+      <div class="tables-container">
+        <div>
+          <h2>MATRIX 3</h2>
+          <table>
+            {% for row in z_matrix %}
+            <tr>
+              {% for coef in row %}
+              <td>{{ coef }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+        <div class="button-container">
+          <button onclick="goBack()">Go Back</button>
+          <button onclick="goToCramers()">Go to Jacobi's</button>
+        </div>
+
+        <div>
+          <h2>CONSTANT'S VECTOR</h2>
+          <table>
+            <tr>
+              {% for constant in constants_vector %}
+              <td>{{ constant }}</td>
+              {% endfor %}
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+
+      function goToCramers() {
+        window.location.href = "/jacobi";
+      }
+    </script>
+  </body>
 </html>

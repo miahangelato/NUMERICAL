@@ -1,16 +1,172 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h2>Jacobi Solver</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Calculate</button>
-</form>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jacobi Method Solver</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to top, #ffd700, #ffa500);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-</body>
+      .form-container {
+        width: 60%;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        height: 90%;
+        position: relative;
+      }
+
+      .form-section {
+        margin-bottom: 20px;
+      }
+
+      .form-section label {
+        font-weight: bold;
+      }
+
+      .form-section textarea {
+        width: 100%;
+        height: 150px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        resize: none;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 40px;
+      }
+
+      .logo img {
+        max-width: 400px;
+        height: auto;
+      }
+
+      .form-container::before,
+      .form-container::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-image: url('{% static "nail_icon.png" %}');
+        background-size: cover;
+      }
+
+      .form-container::before {
+        top: 15px;
+        left: 15px;
+      }
+
+      .form-container::after {
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .warning {
+        background-color: #ffcccc;
+        color: #cc0000;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .button-container button {
+        background-color: #ffe000;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+        border: 2px solid #000;
+        border-radius: 15px;
+        margin: 0 10px;
+      }
+
+      .button-container button:hover {
+        background-color: black;
+        color: #fff;
+        box-shadow: 0 8px 12px rgba(255, 230, 0, 0.1);
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="logo">
+        <a href="/"><img src="{% static 'Jacobi_Meth.png' %}" alt="Logo" /></a>
+      </div>
+      <form action="" method="post" id="jacobiForm">
+        {% csrf_token %}
+        <div class="form-section">
+          <label for="equations">Equations:</label>
+          <textarea id="equations" name="equations" rows="5"></textarea>
+        </div>
+        <div class="form-section">
+          <label for="iterations">Number of Iterations:</label>
+          <input
+            type="number"
+            id="iterations"
+            name="iterations"
+            min="1"
+            required
+          />
+        </div>
+        <div class="form-section">
+          <label for="initial_guesses">Initial Guesses:</label>
+          <input
+            type="text"
+            id="initial_guesses"
+            name="initial_guesses"
+            required
+          />
+        </div>
+        <div class="warning">
+          <strong>Warning:</strong>
+          <p>1. Only 3 variables possible.</p>
+          <p>
+            2. Always add a coefficient next to the variable even if it's one.
+          </p>
+          <p>3. No whitespaces.</p>
+          <p>4. Form of equation should be Ax+By+Cz=Constant.</p>
+        </div>
+        <div class="button-container">
+          <button value="Submit">SUBMIT</button>
+          <button value="Reset" onclick="resetForm()">RESET</button>
+          <button type="button" onclick="goBack()">RETURN HOME</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function resetForm() {
+        document.getElementById("jacobiForm").reset();
+      }
+
+      function goBack() {
+        window.location.href = "/";
+        return false;
+      }
+    </script>
+  </body>
 </html>
