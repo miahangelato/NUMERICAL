@@ -24,6 +24,7 @@
         padding: 20px;
         position: relative;
         height: 80vh;
+        overflow: auto;
       }
 
       h2 {
@@ -130,7 +131,7 @@
       .result-container::before,
       .result-container::after {
         content: "";
-        position: absolute;
+        position: fixed;
         width: 30px;
         height: 30px;
         background-image: url('{% static "nail_icon.png" %}');
@@ -138,13 +139,13 @@
       }
 
       .result-container::before {
-        top: 15px;
-        left: 15px;
+        top: 85px;
+        left: 85px;
       }
 
       .result-container::after {
-        bottom: 15px;
-        right: 15px;
+        bottom: 85px;
+        right: 85px;
       }
     </style>
   </head>
